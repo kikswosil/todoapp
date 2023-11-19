@@ -23,7 +23,6 @@ export class AuthGuard implements CanActivate {
       context.getHandler(),
       context.getClass(),
     ]);
-
     if (isSkipped) return true;
 
     const request = context.switchToHttp().getRequest();
@@ -44,7 +43,7 @@ export class AuthGuard implements CanActivate {
   }
 
   private extractTokenFromHeaders(request: Request): string | undefined {
-    const [type, token] = request.headers.authorization.split(' ') ?? [];
+    const [type, token] = request.headers.authorization?.split(' ') ?? [];
     return type === 'Bearer' ? token : undefined;
   }
 }
