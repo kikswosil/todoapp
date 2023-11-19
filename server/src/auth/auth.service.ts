@@ -1,5 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { JwTService } from '@nestjs/jwt';
+import { JwtService } from '@nestjs/jwt';
 
 import { UsersService } from 'src/users/users.service';
 
@@ -7,7 +7,7 @@ import { UsersService } from 'src/users/users.service';
 export class AuthService {
   constructor(
     private usersService: UsersService,
-    private jwtService: JwTService,
+    private jwtService: JwtService,
   ) {}
 
   async signIn(email: string, pass: string) {
