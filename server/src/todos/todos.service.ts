@@ -3,7 +3,6 @@ import { Injectable } from '@nestjs/common';
 import { Todo } from '@prisma/client';
 
 import { PrismaService } from '../prisma/prisma.service';
-import { title } from 'process';
 
 @Injectable()
 export class TodosService {
@@ -23,14 +22,6 @@ export class TodosService {
     return await this.prismaService.todo.create({
       data: {
         ...todo,
-        author: {
-          connect: {
-            id: todo?.authorId,
-          },
-        },
-      },
-      include: {
-        author: true,
       },
     });
   }
