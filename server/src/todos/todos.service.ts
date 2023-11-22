@@ -25,9 +25,7 @@ export class TodosService {
         ...todo,
         author: {
           connect: {
-            where: {
-              id: todo?.authorId,
-            },
+            id: todo?.authorId,
           },
         },
       },
