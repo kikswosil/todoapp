@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { Todo } from '@prisma/client';
 
 import { PrismaService } from '../prisma/prisma.service';
+import { TodoDto } from './todo.dto';
 
 @Injectable()
 export class TodosService {
@@ -18,7 +19,7 @@ export class TodosService {
     return await this.prismaService.todo.findFirst({ where: { id: todoId } });
   }
 
-  async insertTodo(todo: Todo) {
+  async insertTodo(todo: TodoDto) {
     return await this.prismaService.todo.create({
       data: {
         ...todo,
@@ -26,7 +27,7 @@ export class TodosService {
     });
   }
 
-  async updateTodo(oldTodoId: number, newTodo: Todo) {
+  async updateTodo(oldTodoId: number, newTodo: TodoDto) {
     return await this.prismaService.todo.update({
       data: newTodo,
       where: { id: oldTodoId },
