@@ -1,0 +1,11 @@
+header {
+    width: 100vw;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 5px 20px lightgrey;
+    background-image: linear-gradient(to bottom right, darkblue, purple);
+    font-family: 'Roboto', sans-serif;
+    color: #ddd;
+}
