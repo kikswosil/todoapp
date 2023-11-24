@@ -1,4 +1,123 @@
 .login-page {
-    margin-top: 50px;
-    height: calc(100vh - 50px);
+  margin-top: 50px;
+  height: calc(100vh - 50px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../../assets/webb-dark.png");
+}
+
+@media screen and (min-width: 800px) {
+  .login-form-container {
+    width: 30vw !important;
+  }
+}
+
+.login-form-container {
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 40px;
+  width: 100vw;
+}
+
+.login-form-container > h1 {
+  font-family: "Roboto", sans-serif;
+  margin-left: 20px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+  padding: 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+.login-form > * {
+  margin-top: 20px;
+}
+
+.login-form > button {
+  width: calc(50%);
+  height: 30px;
+  border: none;
+  border-radius: 2px;
+  background-image: linear-gradient(to bottom right, darkblue, purple, crimson);
+  color: #eee;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  box-shadow: 5px 5px 5px lightgray;
+}
+
+.login-form > button:hover {
+  box-shadow: 1px 1px 5px lightgray;
+  animation: button-hover-on 0.5s ease-out;
+}
+
+.login-form > button:not(:hover) {
+  animation: button-hover-off 0.5s ease-in;
+}
+
+.login-form > input {
+  border: none;
+  border-bottom: 1px solid grey;
+  background-color: #eee;
+  border-radius: 2px;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 5px;
+
+  animation: translate-focus-out 0.5s;
+}
+
+.login-form > input:focus {
+  border: none;
+  outline: none;
+  background-color: white;
+  border-bottom: 1px solid blue;
+
+  animation: translate-focus-in 0.5s;
+}
+
+@keyframes button-hover-on {
+  from {
+    box-shadow: 5px 5px 5px lightgray;
+  }
+  to {
+    box-shadow: 1px 1px 5px lightgray;
+  }
+}
+
+@keyframes button-hover-off {
+  from {
+    box-shadow: 1px 1px 5px lightgray;
+  }
+  to {
+    box-shadow: 5px 5px 5px lightgray;
+  }
+}
+
+@keyframes translate-focus-out {
+  from {
+    background-color: white;
+    border-bottom: 1px solid blue;
+  }
+  to {
+    background-color: #eee;
+    border-bottom: 1px solid grey;
+  }
+}
+
+@keyframes translate-focus-in {
+  from {
+    background-color: #eee;
+    border-bottom: 1px solid grey;
+  }
+  to {
+    background-color: white;
+    border-bottom: 1px solid blue;
+  }
 }
