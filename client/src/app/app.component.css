@@ -8,4 +8,6 @@ header {
     background-image: linear-gradient(to bottom right, darkblue, purple);
     font-family: 'Roboto', sans-serif;
     color: #ddd;
+    position: fixed;
+    top: 0;
 }
