@@ -8,8 +8,8 @@ import { User } from './user.interface';
 })
 export class UserService {
 
-  jwt_token: string = "";
-  user: User | null = null;
+  private jwt_token: string = "";
+  private user: User | null = null;
 
   constructor() { }
 
