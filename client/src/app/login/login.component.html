@@ -1,11 +1,11 @@
 <section class="login-page">
     <div class="login-form-container">
         <h1>Sign in</h1>
-        <form class="login-form">
+        <form class="login-form" (ngSubmit)="onSubmit()">
             <label for="">email: </label>
-            <input type="email" />
+            <input type="email" name="email" [(ngModel)]="model.email"/>
             <label for="password">password: </label>
-            <input type="password" />
+            <input type="password" name="password" [(ngModel)]="model.password" />
             <button type="submit">sign in</button>
         </form>
     </div>
