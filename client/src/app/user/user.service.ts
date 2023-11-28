@@ -2,8 +2,8 @@ import { Inject, Injectable } from '@angular/core';
 import { UserModule } from './user.module';
 import { UserLoginDTO } from './user-login-dto';
 import { User } from './user.interface';
-import { HttpClient, HttpRequest } from '@angular/common/http';
-import { Observable, Subscription, firstValueFrom } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: UserModule 
