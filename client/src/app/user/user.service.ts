@@ -10,14 +10,14 @@ import { Subscription } from 'rxjs';
 })
 export class UserService {
 
-  private url = "http://localhost:3000/api";
+  private url = "http://localhost:3000/api/auth";
   private jwt_token: string = "";
   private user: User | null = null;
 
   constructor(@Inject(HttpClient) private httpClient: HttpClient) {}
 
   authenticate(user: UserLoginDTO): Subscription {
-    return this.httpClient.post(`${this.url}/auth/login`, user).subscribe(response => console.log(response));
+    return this.httpClient.post(`${this.url}/login`, user).subscribe(response => console.log(response));
   }
 
   getUserProfile() {
