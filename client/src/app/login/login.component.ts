@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Form, FormsModule, NgForm, NgModel } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { UserLoginDTO } from '../user/user-login-dto';
 import { UserService } from '../user/user.service';
 import { Inject } from '@angular/core';
