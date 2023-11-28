@@ -82,6 +82,14 @@
   animation: translate-focus-in 0.5s;
 }
 
+.input-invalid {
+  border-bottom: 1px solid red;
+}
+
+.error-message-box {
+  color: red;
+}
+
 @keyframes button-hover-on {
   from {
     box-shadow: 5px 5px 5px lightgray;

@@ -3,7 +3,7 @@ import { UserModule } from './user.module';
 import { UserLoginDTO } from './user-login-dto';
 import { User } from './user.interface';
 import { HttpClient, HttpRequest } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: UserModule 
@@ -11,13 +11,13 @@ import { Subscription } from 'rxjs';
 export class UserService {
 
   private url = "http://localhost:3000/api/auth";
-  private jwt_token: string = "";
   private user: User | null = null;
 
   constructor(@Inject(HttpClient) private httpClient: HttpClient) {}
 
-  authenticate(user: UserLoginDTO): Subscription {
-    return this.httpClient.post(`${this.url}/login`, user).subscribe(response => console.log(response));
+  authenticate(user: UserLoginDTO): Observable<any> {
+    const request: Observable<any> = this.httpClient.post<{access_token: string}>(`${this.url}/login`, user, {headers: {"Content-Type": "application/json"}});
+    return request;
   }
 
   getUserProfile() {
