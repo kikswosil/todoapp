@@ -30,8 +30,8 @@ export class LoginComponent {
       return;
     }
 
-    const {token, errorMessage} = await this.userService.authenticate(this.model);
-    if(errorMessage) this.errorMessage = errorMessage;
+    const {success, errorMessage} = await this.userService.authenticate(this.model);
+    if(!success) this.errorMessage = errorMessage;
     else console.log(await this.userService.getUserProfile());
   }
 }

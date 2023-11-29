@@ -9,15 +9,15 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 })
 export class UserService {
   private url = 'http://localhost:3000/api/auth';
-  public access_token = '';
+  private access_token = '';
   private user: User | null = null;
 
   constructor(@Inject(HttpClient) private httpClient: HttpClient) {}
 
   authenticate(
     user: UserLoginDTO
-  ): Promise<{ token: string; errorMessage: string }> {
-    return new Promise<{ token: string; errorMessage: string }>(
+  ): Promise<{ success: boolean; errorMessage: string }> {
+    return new Promise<{ success: boolean; errorMessage: string }>(
       (resolve, reject) => {
         let httpError = "";
         this.httpClient
@@ -27,7 +27,7 @@ export class UserService {
           .subscribe({
             next: (response) => {
               this.access_token = response?.access_token;
-              resolve({token: this.access_token, errorMessage: httpError});
+              resolve({success: this.access_token ? true : false, errorMessage: httpError});
             },
             error: (error: HttpErrorResponse) => {
               if (error.status == 401)
@@ -35,14 +35,14 @@ export class UserService {
                   'Failed to authenticate: invalid email or password.';
               else if (error.status >= 500) httpError = 'Error: Server error.';
               else httpError = 'Error: Unknown error';
-              resolve({token: this.access_token, errorMessage: httpError});
+              resolve({success: this.access_token ? true : false, errorMessage: httpError});
             },
           });
       }
     );
   }
 
-  getUserProfile(): Promise<any> {
+  getUserProfile(): Promise<{response: {}, error: string}> {
     const promise = new Promise<{response: {}, error: string}>((resolve, reject) => {
       this.httpClient.get<{sub: number, username: string, iat: number, exp: number}>(`${this.url}/user-profile`, {
         headers: {
