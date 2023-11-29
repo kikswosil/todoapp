@@ -5,7 +5,6 @@ import { UserService } from '../user/user.service';
 import { Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -24,24 +23,15 @@ export class LoginComponent {
     private router: Router
   ) {}
 
-  onSubmit(form: NgForm): void {
+  async onSubmit(form: NgForm): Promise<void> {
     if (!form.valid) {
       this.errorMessage =
         'Cannot submit: One or more of required fields are empty.';
       return;
     }
-    this.userService.authenticate(this.model).subscribe({
-      next: (response) => {
-        this.router.navigate(['/app']);
-        this.errorMessage = "";
-      },
-      error: (error: HttpErrorResponse) => {
-        if (error.status == 401)
-          this.errorMessage =
-            'Failed to authenticate: invalid email or password.';
-        else if (error.status >= 500) this.errorMessage = 'Error: Server error.';
-        else this.errorMessage = 'Error: Unknown error';
-      },
-    });
+
+    const {token, errorMessage} = await this.userService.authenticate(this.model);
+    if(errorMessage) this.errorMessage = errorMessage;
+    else console.log('token: ', token);
   }
 }
