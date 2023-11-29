@@ -39,8 +39,8 @@ export class LoginComponent {
         if (error.status == 401)
           this.errorMessage =
             'Failed to authenticate: invalid email or password.';
-        else if (error.status >= 500) this.errorMessage = 'Server error.';
-        else this.errorMessage = 'Unknown error';
+        else if (error.status >= 500) this.errorMessage = 'Error: Server error.';
+        else this.errorMessage = 'Error: Unknown error';
       },
     });
   }
