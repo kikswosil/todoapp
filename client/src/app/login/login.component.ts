@@ -32,6 +32,6 @@ export class LoginComponent {
 
     const {token, errorMessage} = await this.userService.authenticate(this.model);
     if(errorMessage) this.errorMessage = errorMessage;
-    else console.log('token: ', token);
+    else console.log(await this.userService.getUserProfile());
   }
 }

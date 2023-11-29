@@ -17,7 +17,7 @@ export class UserService {
   authenticate(
     user: UserLoginDTO
   ): Promise<{ token: string; errorMessage: string }> {
-    const promise = new Promise<{ token: string; errorMessage: string }>(
+    return new Promise<{ token: string; errorMessage: string }>(
       (resolve, reject) => {
         let httpError = "";
         this.httpClient
@@ -40,10 +40,24 @@ export class UserService {
           });
       }
     );
-    return promise;
   }
 
-  getUserProfile() {
-    return this.user;
+  getUserProfile(): Promise<any> {
+    const promise = new Promise<{response: {}, error: string}>((resolve, reject) => {
+      this.httpClient.get<{sub: number, username: string, iat: number, exp: number}>(`${this.url}/user-profile`, {
+        headers: {
+          "Content-Type": "application/json", 
+          "Authorization": `Bearer ${this.access_token}`
+        }
+      }).subscribe({
+        next: (response) => {
+          resolve({response, error: ""})
+        },
+        error: (error: HttpErrorResponse) => {
+          resolve({response: {}, error: error.message})
+        }
+      })
+    });
+    return promise;
   }
 }
