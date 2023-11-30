@@ -12,6 +12,5 @@ export class MainComponent implements OnInit{
 
   async ngOnInit(): Promise<void> {
     const {response, error} = await this.userService.getUserProfile();
-    console.log(response);
   }
 }
