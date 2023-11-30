@@ -32,6 +32,6 @@ export class LoginComponent {
 
     const {success, errorMessage} = await this.userService.authenticate(this.model);
     if(!success) this.errorMessage = errorMessage;
-    else console.log(await this.userService.getUserProfile());
+    else this.router.navigate(['/app']);
   }
 }
