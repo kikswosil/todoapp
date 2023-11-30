@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   imports: [FormsModule, CommonModule],
-  providers: [UserService],
   standalone: true,
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
@@ -32,6 +31,8 @@ export class LoginComponent {
 
     const {success, errorMessage} = await this.userService.authenticate(this.model);
     if(!success) this.errorMessage = errorMessage;
-    else this.router.navigate(['/app']);
+    else {
+      this.router.navigate(['/app']);
+    }
   }
 }

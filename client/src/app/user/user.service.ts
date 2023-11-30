@@ -43,7 +43,7 @@ export class UserService {
   }
 
   getUserProfile(): Promise<{response: {}, error: string}> {
-    const promise = new Promise<{response: {}, error: string}>((resolve, reject) => {
+    return new Promise<{response: {}, error: string}>((resolve, reject) => {
       this.httpClient.get<{sub: number, username: string, iat: number, exp: number}>(`${this.url}/user-profile`, {
         headers: {
           "Content-Type": "application/json", 
@@ -58,6 +58,5 @@ export class UserService {
         }
       })
     });
-    return promise;
   }
 }

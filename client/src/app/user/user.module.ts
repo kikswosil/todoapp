@@ -7,11 +7,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
-  providers: [UserService],
-  exports: [],
+  providers: [],
   imports: [
     CommonModule,
     HttpClientModule
-  ]
+  ],
 })
 export class UserModule { }
