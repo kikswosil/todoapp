@@ -1,5 +1,5 @@
 # Todo app
-## simple todo app made with angular and nest.js
+## Simple todo app made with angular and nest.js
 This todo app has been made by Krzysztof Lisowski (<a href="https://github.com/kikswosil/">@kikswosil</a>) using:
 - Angular
 - nest.js
