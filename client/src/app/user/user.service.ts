@@ -14,6 +14,10 @@ export class UserService {
 
   constructor(@Inject(HttpClient) private httpClient: HttpClient) {}
 
+  isAuthenticated() {
+    return this.access_token != '' ? true : false;
+  }
+
   authenticate(
     user: UserLoginDTO
   ): Promise<{ success: boolean; errorMessage: string }> {
@@ -42,7 +46,7 @@ export class UserService {
     );
   }
 
-  getUserProfile(): Promise<{response: {}, error: string}> {
+  getUserProfile(): Promise<{response: {sub?: number, username?: string, iat?: number, exp?: number}, error: string}> {
     return new Promise<{response: {}, error: string}>((resolve, reject) => {
       this.httpClient.get<{sub: number, username: string, iat: number, exp: number}>(`${this.url}/user-profile`, {
         headers: {
