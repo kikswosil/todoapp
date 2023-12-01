@@ -13,7 +13,8 @@ export class MainComponent implements OnInit{
   constructor(@Inject(UserService) private userService: UserService, private router: Router) {}
 
   async ngOnInit(): Promise<void> {
-    if(!this.userService.isAuthenticated()) this.router.navigate(['']);
+    // for development purposes disabled this line. uncomment it later.
+    // if(!this.userService.isAuthenticated()) this.router.navigate(['']);
     const {response, error} = await this.userService.getUserProfile();
     this.username = response?.username;
   }

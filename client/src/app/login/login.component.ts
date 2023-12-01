@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
+      // for development purposes only. remove later:
+      this.router.navigate(['/app']);
       if(this.userService.isAuthenticated()) this.router.navigate(['/app']);
   }
 
