@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-logout',
@@ -12,6 +13,9 @@ import { CommonModule } from '@angular/common';
   `,
   styleUrl: './logout.component.css'
 })
-export class LogoutComponent {
+export class LogoutComponent implements OnInit {
+  constructor(@Inject(UserService) private userService: UserService){}
+  ngOnInit(): void {
 
+  }
 }
