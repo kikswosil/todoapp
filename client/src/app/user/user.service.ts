@@ -14,6 +14,11 @@ export class UserService {
 
   constructor(@Inject(HttpClient) private httpClient: HttpClient) {}
 
+  logout() {
+    this.access_token = '';
+    this.user = null;
+  }
+
   isAuthenticated() {
     return this.access_token != '' ? true : false;
   }
