@@ -44,6 +44,7 @@ export class UserService {
                   'Failed to authenticate: invalid email or password.';
               else if (error.status >= 500) httpError = 'Error: Server error.';
               else httpError = 'Error: Unknown error';
+
               resolve({success: this.access_token ? true : false, errorMessage: httpError});
             },
           });

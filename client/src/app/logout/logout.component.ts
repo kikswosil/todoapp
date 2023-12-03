@@ -7,12 +7,7 @@ import { Router } from '@angular/router';
   selector: 'app-logout',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <p>
-      logout works!
-    </p>
-  `,
-  styleUrl: './logout.component.css'
+  template: ``,
 })
 export class LogoutComponent implements OnInit {
   constructor(@Inject(UserService) private userService: UserService, @Inject(Router) private router: Router){}
