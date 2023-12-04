@@ -13,7 +13,23 @@ export class MainComponent implements OnInit{
   username: string | undefined = '';
 
   // make this fetch from the server.
-  todos: Todo[] = [];
+  todos: Todo[] = [
+    {
+      title: 'go shopping',
+      details: 'buy new trowsers',
+      isDone: false
+    },
+    {
+      title: 'do the laundry',
+      details: '',
+      isDone: false
+    },
+    {
+      title: 'do something',
+      details: 'do somthing very important',
+      isDone: true
+    }
+  ];
 
   constructor(@Inject(UserService) private userService: UserService, private router: Router) {}
 
