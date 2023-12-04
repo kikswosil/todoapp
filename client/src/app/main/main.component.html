@@ -9,4 +9,9 @@
 </section>
 <section class="todo-section">
     <!-- render todos here. -->
+    <div class="todo" *ngFor="let todo of todos">
+        <h1>{{todo.title}}</h1>
+        <span>{{todo.isDone ? '✔' : '❌'}}</span>
+        <div>{{todo.details}}</div>
+    </div>
 </section>
