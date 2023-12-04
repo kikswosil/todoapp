@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Inject } from '@angular/core';
 import { UserService } from '../user/user.service';
 import { Router } from '@angular/router';
+import { Todo } from './todo.interface';
 
 @Component({
   selector: 'app-main',
@@ -10,6 +11,10 @@ import { Router } from '@angular/router';
 })
 export class MainComponent implements OnInit{
   username: string | undefined = '';
+
+  // make this fetch from the server.
+  todos: Todo[] = [];
+
   constructor(@Inject(UserService) private userService: UserService, private router: Router) {}
 
   async ngOnInit(): Promise<void> {
