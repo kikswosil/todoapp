@@ -7,11 +7,7 @@
         <a href="/logout" routerLinkActive="router-link-active" >log out <img src="../../assets/logout-svgrepo-com.svg" alt="logout"></a>
     </div>
 </section>
-<section class="todo-section">
+<section class="todo-section" *ngFor="let todo of todos">
     <!-- render todos here. -->
-    <div class="todo" *ngFor="let todo of todos">
-        <h1>{{todo.title}}</h1>
-        <span>{{todo.isDone ? '✔' : '❌'}}</span>
-        <div>{{todo.details}}</div>
-    </div>
+    <app-todo [todo]="todo"></app-todo>
 </section>

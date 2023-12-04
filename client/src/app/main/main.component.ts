@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Inject } from '@angular/core';
 import { UserService } from '../user/user.service';
 import { Router } from '@angular/router';
-import { Todo } from './todo.interface';
+import { Todo } from '../todo/todo.interface';
 
 @Component({
   selector: 'app-main',
@@ -25,7 +25,7 @@ export class MainComponent implements OnInit{
       isDone: false
     },
     {
-      title: 'do something',
+      title: 'do something silly',
       details: 'do somthing very important',
       isDone: true
     }
