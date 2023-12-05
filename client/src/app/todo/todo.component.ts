@@ -12,6 +12,7 @@ import { Todo } from './todo.interface';
         <h1>{{ todo.isDone ? '✅' : '❌' }} {{ todo.title }}</h1>
         <div>{{ todo.details }}</div>
       </div>
+      <!-- could extract this into a separate component. -->
       <div class="buttons">
         <button class="list-button" (click)="toggleListOpen($event)">...</button>
         <ul class="list" *ngIf="isListOpen">
@@ -29,7 +30,7 @@ export class TodoComponent {
 
   isListOpen: boolean = false;
 
-  @HostListener('click') 
+  @HostListener('window:click') 
   closeList() {
     this.isListOpen = false;
   }
