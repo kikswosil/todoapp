@@ -16,8 +16,8 @@ import { Todo } from './todo.interface';
       <div class="buttons">
         <button class="list-button" (click)="toggleListOpen($event)">...</button>
         <ul class="list" *ngIf="isListOpen">
-          <li (click)="markAsDone()">mark as done</li>
-          <li (click)="edit()">edit</li>
+          <li (click)="markAsDone($event)">mark as done</li>
+          <li (click)="edit($event)">edit</li>
         </ul>
       </div>
     </div>
@@ -40,11 +40,11 @@ export class TodoComponent {
     this.isListOpen = !this.isListOpen;
   }
 
-  public markAsDone() {
+  public markAsDone(evnet: Event) {
     console.log('done')
   }
 
-  public edit() {
+  public edit(event: Event) {
     console.log('edit')
   }
 }
