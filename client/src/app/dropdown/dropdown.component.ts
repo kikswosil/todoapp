@@ -11,7 +11,7 @@ import { Option } from './option.interface';
     <div class="buttons">
       <button class="list-button" (click)="toggleListOpen($event)">...</button>
       <ul class="list" *ngIf="isListOpen">
-        <li *ngFor="let option of options" (click)="defaultClick($event, option.callback)">{{option.text}}</li>
+        <li *ngFor="let option of options" (click)="noPropagationClick($event, option.callback)">{{option.text}}</li>
       </ul>
     </div>
   `,
