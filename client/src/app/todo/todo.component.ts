@@ -29,8 +29,6 @@ export class TodoComponent {
 
   isListOpen: boolean = false;
 
-  public ngAfterViewInit(): void {}
-
   public toggleListOpen() {
     this.isListOpen = !this.isListOpen;
   }
