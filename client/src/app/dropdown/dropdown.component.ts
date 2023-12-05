@@ -11,7 +11,7 @@ import { Option } from './option.interface';
     <div class="buttons">
       <button class="list-button" (click)="toggleListOpen($event)">...</button>
       <ul class="list" *ngIf="isListOpen">
-        <li *ngFor="let option of options" (click)="option.callback()">{{option.text}}</li>
+        <li *ngFor="let option of options" (click)="defaultClick($event, option.callback)">{{option.text}}</li>
       </ul>
     </div>
   `,
@@ -30,5 +30,10 @@ export class DropdownComponent {
   public toggleListOpen(event: Event) {
     event.stopPropagation();
     this.isListOpen = !this.isListOpen;
+  }
+
+  public noPropagationClick(event: Event, callback: Function) {
+    event.stopPropagation();
+    callback();
   }
 }
