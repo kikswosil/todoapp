@@ -8,13 +8,12 @@ import { Todo } from './todo.interface';
   imports: [CommonModule],
   template: `
     <div class="todo">
-        <h1>{{todo.title}}</h1>
-        <span>{{todo.isDone ? '✅' : '❌'}}</span>
-        <div>{{todo.details}}</div>
+      <h1>{{ todo.isDone ? '✅' : '❌' }} {{ todo.title }}</h1>
+      <div>{{ todo.details }}</div>
     </div>
   `,
-  styleUrl: './todo.component.css'
+  styleUrl: './todo.component.css',
 })
 export class TodoComponent {
-  @Input({required: true}) todo!: Todo;
+  @Input({ required: true }) todo!: Todo;
 }
