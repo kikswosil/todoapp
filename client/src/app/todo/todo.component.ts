@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Todo } from './todo.interface';
 
@@ -13,7 +13,7 @@ import { Todo } from './todo.interface';
         <div>{{ todo.details }}</div>
       </div>
       <div class="buttons">
-        <button class="list-button" (click)="toggleListOpen()">...</button>
+        <button class="list-button" (click)="toggleListOpen($event)">...</button>
         <ul class="list" *ngIf="isListOpen">
           <li (click)="markAsDone()">mark as done</li>
           <li (click)="edit()">edit</li>
@@ -29,7 +29,13 @@ export class TodoComponent {
 
   isListOpen: boolean = false;
 
-  public toggleListOpen() {
+  @HostListener('click') 
+  closeList() {
+    this.isListOpen = false;
+  }
+
+  public toggleListOpen(event: Event) {
+    event?.stopPropagation();
     this.isListOpen = !this.isListOpen;
   }
 
