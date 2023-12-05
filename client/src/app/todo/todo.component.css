@@ -29,22 +29,3 @@
     text-overflow: ellipsis;
     max-width: 250px;
 }
-
-.list {
-    position: fixed;
-    list-style-type: none;
-    margin: 5px;
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-
-.list > li {
-    min-width: 150px;
-    padding: 2px;
-    border-bottom: 1px solid grey;
-}
-
-.list > li:hover {
-    background-color: lightgray;
-}
