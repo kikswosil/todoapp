@@ -19,5 +19,10 @@ export const routes: Routes = [
     path: 'logout',
     component: LogoutComponent,
     title: 'logging out.'
+  },
+  {
+    path: 'app/edit/:id',
+    component: MainComponent,
+    title: 'edit todo'
   }
 ];
