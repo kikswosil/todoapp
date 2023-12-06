@@ -1,3 +1,4 @@
+<div class="wrapper">
 <section class="top-section">
     <h1>Hello {{ username }}!</h1>
     <div>
@@ -7,7 +8,8 @@
         <a href="/logout" routerLinkActive="router-link-active" >log out <img src="../../assets/logout-svgrepo-com.svg" alt="logout"></a>
     </div>
 </section>
-<section class="todo-section" *ngFor="let todo of todos">
+<section class="todo-section">
     <!-- render todos here. -->
-    <app-todo [todo]="todo"></app-todo>
+    <app-todo *ngFor="let todo of todos" [todo]="todo"></app-todo>
 </section>
+</div>

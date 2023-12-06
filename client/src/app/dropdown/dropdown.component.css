@@ -1,6 +1,6 @@
 .list {
     position: fixed;
-    left: calc(100vw - 175px);
+    /* left: calc(100vw - 175px); */
     list-style-type: none;
     margin: 5px;
     background-color: white;
