@@ -1,5 +1,6 @@
 .list {
     position: fixed;
+    left: calc(100vw - 175px);
     list-style-type: none;
     margin: 5px;
     background-color: white;
@@ -15,9 +16,10 @@
 
 .list > li:hover {
     background-color: lightgray;
+    transition: all .25s;
 }
 
-.buttons > div {
+.list-button {
     outline: none;
     border: none;
     background-color: #ffffff00;
@@ -30,6 +32,7 @@
     justify-content: center;
 }
 
-.buttons > div:hover {
+.list-button:hover {
     background-color: lightgrey;
+    transition: all .25s;
 }
