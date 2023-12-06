@@ -5,7 +5,7 @@
     padding: 20px;
 
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: baseline;
     justify-content: space-between;
 }

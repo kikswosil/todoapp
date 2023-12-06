@@ -16,3 +16,20 @@
 .list > li:hover {
     background-color: lightgray;
 }
+
+.buttons > div {
+    outline: none;
+    border: none;
+    background-color: #ffffff00;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons > div:hover {
+    background-color: lightgrey;
+}

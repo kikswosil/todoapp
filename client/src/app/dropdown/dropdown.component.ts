@@ -9,7 +9,7 @@ import { Option } from './option.interface';
   imports: [CommonModule],
   template: `
     <div class="buttons">
-      <button class="list-button" (click)="toggleListOpen($event)">...</button>
+      <div class="list-button" (click)="toggleListOpen($event)"><img src="../../assets/more-icon.svg"></div>
       <ul class="list" *ngIf="isListOpen">
         <li *ngFor="let option of options" (click)="noPropagationClick($event, option.callback)">{{option.text}}</li>
       </ul>
