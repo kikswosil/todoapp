@@ -18,7 +18,6 @@ export class TodosService {
   public async getTodosForUser() {
     if(!this.userService.isAuthenticated()) return;
     const userId = this.extractUserIdFromProfile();
-    // add http request here.
     return new Promise<{todos: [{id: number, title: string, details: string, isDone: boolean, authorId: number}] | [], error: string}>((resolve, reject) => {
       this.httpClient.get<[{id: number, title: string, details: string, isDone: boolean, authorId: number}]>(`${this.url}/${userId}`, {
         headers: {
