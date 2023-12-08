@@ -6,4 +6,8 @@ import { UserService } from '../user/user.service';
 })
 export class TodosService {
   constructor(@Inject(UserService) private userService: UserService) { }
+
+  public getTodosForUser() {
+    if(!this.userService.isAuthenticated) return;
+  }
 }
