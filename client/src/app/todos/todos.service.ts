@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { UserService } from '../user/user.service';
 import { Todo } from './todo.interface';
 import { HttpClient } from '@angular/common/http';
+import { TodoResponse } from './todo-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,8 @@ export class TodosService {
   public async getTodosForUser() {
     if(!this.userService.isAuthenticated()) return;
     const userId = this.extractUserIdFromProfile();
-    return new Promise<{todos: [{id: number, title: string, details: string, isDone: boolean, authorId: number}] | [], error: string}>((resolve, reject) => {
-      this.httpClient.get<[{id: number, title: string, details: string, isDone: boolean, authorId: number}]>(`${this.url}/${userId}`, {
+    return new Promise<{todos: TodoResponse[] | [], error: string}>((resolve, reject) => {
+      this.httpClient.get<TodoResponse[]>(`${this.url}/${userId}`, {
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${this.userService.getToken()}`
