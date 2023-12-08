@@ -3,8 +3,11 @@ import { Inject } from '@angular/core';
 import { UserService } from '../user/user.service';
 import { Router } from '@angular/router';
 import { Todo } from '../todo/todo.interface';
+import { TodoComponent } from '../todo/todo.component';
 
 @Component({
+  standalone: true,
+  imports: [TodoComponent],
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
