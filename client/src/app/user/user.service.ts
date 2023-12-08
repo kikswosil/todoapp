@@ -1,12 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
-import { UserModule } from './user.module';
 import { UserLoginDTO } from './user-login-dto';
 import { User } from './user.interface';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-@Injectable({
-  providedIn: UserModule,
-})
+@Injectable()
 export class UserService {
   private url = 'http://localhost:3000/api/auth';
   private access_token = '';
