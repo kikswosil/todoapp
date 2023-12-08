@@ -68,4 +68,9 @@ export class UserService {
       })
     });
   }
+
+  getToken(): string | null {
+    if(this.isAuthenticated()) return this.access_token;
+    return null
+  }
 }

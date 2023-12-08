@@ -8,7 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Todo } from './todo.interface';
+import { Todo } from '../todos/todo.interface';
 import { DropdownComponent } from "../dropdown/dropdown.component";
 import { Option } from '../dropdown/option.interface';
 
