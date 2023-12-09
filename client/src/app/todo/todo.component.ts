@@ -40,12 +40,16 @@ export class TodoComponent {
       callback: () => {
         console.log('done')
         this.todo.isDone = true;
+        // add an http request here.
         this.todoChange.emit(this.todo);
       }
     },
     {
       text: 'edit',
-      callback: () => {console.log('edit')}
+      callback: () => {
+        console.log('edit')
+        // make it open the editor
+      }
     }
   ];
 }
