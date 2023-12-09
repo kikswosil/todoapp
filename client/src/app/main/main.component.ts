@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Inject } from '@angular/core';
-import { UserService } from '../user/user.service';
-import { Router } from '@angular/router';
-import { Todo } from '../todos/todo.interface';
-import { TodoComponent } from '../todo/todo.component';
 import { CommonModule } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { TodoComponent } from '../todo/todo.component';
+import { Todo } from '../todos/todo.interface';
 import { TodosService } from '../todos/todos.service';
+import { UserService } from '../user/user.service';
 
 @Component({
   standalone: true,
