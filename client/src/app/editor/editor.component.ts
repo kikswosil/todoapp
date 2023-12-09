@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Todo } from '../todos/todo.interface';
 
 @Component({
   selector: 'app-editor',
@@ -9,5 +10,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './editor.component.css'
 })
 export class EditorComponent {
-
+  todo: Todo | undefined;
 }
