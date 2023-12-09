@@ -22,6 +22,11 @@ export const routes: Routes = [
     title: 'logging out.'
   },
   {
+    path: 'app/edit/',
+    component: EditorComponent,
+    title: 'edit todo'
+  },
+  {
     path: 'app/edit/:id',
     component: EditorComponent,
     title: 'edit todo'
