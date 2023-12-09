@@ -2,9 +2,11 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  EventEmitter,
   HostListener,
   Input,
   OnInit,
+  Output,
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -30,11 +32,16 @@ import { Option } from '../dropdown/option.interface';
 })
 export class TodoComponent {
   @Input({ required: true }) todo!: Todo;
+  @Output() todoChange: EventEmitter<Todo> = new EventEmitter<Todo>();
 
   options: Option[] = [
     {
       text: 'mark as done',
-      callback: () => {console.log('done')}
+      callback: () => {
+        console.log('done')
+        this.todo.isDone = true;
+        this.todoChange.emit(this.todo);
+      }
     },
     {
       text: 'edit',

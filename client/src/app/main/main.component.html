@@ -10,6 +10,6 @@
 </section>
 <section class="todo-section">
     <!-- render todos here. -->
-    <app-todo *ngFor="let todo of todos" [todo]="todo"></app-todo>
+    <app-todo *ngFor="let todo of todos; let i = index" [(todo)]="todos[i]"></app-todo>
 </section>
 </div>
