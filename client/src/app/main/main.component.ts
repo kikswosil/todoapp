@@ -4,10 +4,13 @@ import { UserService } from '../user/user.service';
 import { Router } from '@angular/router';
 import { Todo } from '../todos/todo.interface';
 import { TodoComponent } from '../todo/todo.component';
+import { CommonModule } from '@angular/common';
+import { TodosService } from '../todos/todos.service';
 
 @Component({
   standalone: true,
-  imports: [TodoComponent],
+  imports: [TodoComponent, CommonModule],
+  providers: [TodosService],
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
@@ -16,30 +19,19 @@ export class MainComponent implements OnInit{
   username: string | undefined = '';
 
   // make this fetch from the server.
-  todos: Todo[] = [
-    {
-      title: 'go shopping',
-      details: 'buy new trowsers',
-      isDone: false
-    },
-    {
-      title: 'do the laundry',
-      details: '',
-      isDone: false
-    },
-    {
-      title: 'do something silly',
-      details: 'do somthing very important',
-      isDone: true
-    }
-  ];
+  todos: Todo[] = [];
 
-  constructor(@Inject(UserService) private userService: UserService, private router: Router) {}
+  constructor(
+    @Inject(UserService) private userService: UserService, 
+    @Inject(TodosService) private todosService: TodosService,
+    private router: Router
+    ) {}
 
   async ngOnInit(): Promise<void> {
     // for development purposes disabled this line. uncomment it later.
-    // if(!this.userService.isAuthenticated()) this.router.navigate(['']);
+    if(!this.userService.isAuthenticated()) this.router.navigate(['']);
     const {response, error} = await this.userService.getUserProfile();
     this.username = response?.username;
+    this.todos = (await this.todosService.getTodosForUser()).todos;
   }
 }
