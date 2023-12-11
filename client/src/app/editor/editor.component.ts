@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Todo } from '../todos/todo.interface';
 import { TodosService } from '../todos/todos.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-editor',
@@ -13,7 +14,14 @@ import { TodosService } from '../todos/todos.service';
 export class EditorComponent implements OnInit {
   todo: Todo | undefined;
 
-  constructor(@Inject(TodosService) private todosService: TodosService) {}
+  constructor(
+    @Inject(TodosService) private todosService: TodosService, 
+    @Inject(ActivatedRoute) private route: ActivatedRoute
+    ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.todosService.getTodosForUser().then(response => {
+      this.todo = response.todos.find(todo => todo.id == Number(this.route.snapshot.paramMap.get('id')));
+    });
+  }
 }
