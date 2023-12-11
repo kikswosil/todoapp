@@ -3,14 +3,14 @@
         <h1 *ngIf="todo">Edit todo</h1>
         <h1 *ngIf="!todo">Create a new todo</h1>
     </div>
-    <form>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
         <div>
             <label for="title">title: </label>
-            <input type="text" name="title" id="title" />
+            <input type="text" name="title" [(ngModel)]="todo.title" id="title" />
         </div>
         <div>
             <label for="details">details: </label>
-            <textarea type="text" name="details" id="title"></textarea>
+            <textarea type="text" name="details" [(ngModel)]="todo.details" id="title"></textarea>
         </div>
         <button type="submit">done.</button>
     </form>

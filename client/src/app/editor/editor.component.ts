@@ -3,16 +3,18 @@ import { CommonModule } from '@angular/common';
 import { Todo } from '../todos/todo.interface';
 import { TodosService } from '../todos/todos.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-editor',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
+  providers: [TodosService],
   templateUrl: './editor.component.html',
   styleUrl: './editor.component.css'
 })
 export class EditorComponent implements OnInit {
-  todo: Todo | undefined;
+  todo: Todo = {title: '', details: '', isDone: false};
 
   constructor(
     @Inject(TodosService) private todosService: TodosService, 
@@ -22,7 +24,12 @@ export class EditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.todosService.getTodosForUser().then(response => {
-      this.todo = response.todos.find(todo => todo.id == Number(this.route.snapshot.paramMap.get('id')));
+      this.todo = response.todos.find(todo => todo.id == Number(this.route.snapshot.paramMap.get('id'))) ?? {title: '', details: '', isDone: false};
     });
+  }
+
+  onSubmit(form: NgForm) {
+    if(!form.valid) return;
+    console.log(this.todo);
   }
 }
