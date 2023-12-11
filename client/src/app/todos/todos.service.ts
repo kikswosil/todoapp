@@ -1,41 +1,40 @@
 import { Inject, Injectable } from '@angular/core';
 import { UserService } from '../user/user.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TodoResponse } from './todo-response.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TodosService {
-
-  private url: string = "http://localhost:3000/api/todos";
+  private url: string = 'http://localhost:3000/api/todos';
+  private headers: HttpHeaders = new HttpHeaders()
+    .append('Content-Type', 'application/json')
 
   constructor(
     @Inject(UserService) private userService: UserService,
     @Inject(HttpClient) private httpClient: HttpClient
-    ) { }
+  ) {}
 
-  public async getTodosForUser(): Promise<{todos: TodoResponse[] | [], error: string}> {
-    const userId = await this.extractUserIdFromProfile();
-    return new Promise<{todos: TodoResponse[] | [], error: string}>((resolve, reject) => {
-      if(!this.userService.isAuthenticated()) resolve({todos: [], error: 'user is not authenticated'});
-      this.httpClient.get<TodoResponse[]>(`${this.url}/${userId}`, {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${this.userService.getToken()}`
-        }
-      }).subscribe({
-          next: response => {
-            resolve({todos: response, error: ''});
-        },
-        error: error => {
-          resolve({todos: [], error: 'something went wrong when fetching todos.'});
-        }
-      });
+  public getTodosForUser(
+    next: (todos: TodoResponse[], error: string) => void
+  ): void {
+    this.userService.getUserProfile((user, error) => {
+      console.log(user);
+      if (error) console.log(error);
+      else
+        this.httpClient
+          .get<TodoResponse[]>(`${this.url}/${user.sub}`, {
+            headers: this.headers.append('Authorization', `Bearer ${this.userService.getToken()}`),
+          })
+          .subscribe({
+            next: (response) => {
+              next(response, '');
+            },
+            error: (response) => {
+              next([], 'Could not fetch.');
+            },
+          });
     });
-  }
-
-  private async extractUserIdFromProfile() {
-    return (await this.userService.getUserProfile()).response.sub;
   }
 }

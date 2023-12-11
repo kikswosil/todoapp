@@ -23,22 +23,19 @@ export class LoginComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-      // for development purposes only. remove later:
-      // this.router.navigate(['/app']);
       if(this.userService.isAuthenticated()) this.router.navigate(['/app']);
   }
 
-  async onSubmit(form: NgForm): Promise<void> {
+  onSubmit(form: NgForm): void {
     if (!form.valid) {
       this.errorMessage =
         'Cannot submit: One or more of required fields are empty.';
       return;
     }
 
-    const {success, errorMessage} = await this.userService.authenticate(this.model);
-    if(!success) this.errorMessage = errorMessage;
-    else {
-      this.router.navigate(['/app']);
-    }
+    this.userService.authenticate(this.model, (success, error) => {
+      if(!success) this.errorMessage = error;
+      else this.router.navigate(['/app']);
+    })
   }
 }

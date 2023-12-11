@@ -1,76 +1,88 @@
 import { Inject, Injectable } from '@angular/core';
 import { UserLoginDTO } from './user-login-dto';
 import { User } from './user.interface';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
+import { Observable, Subscription } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   private url = 'http://localhost:3000/api/auth';
   private access_token = '';
-  private user: User | null = null;
+
+  private headers: HttpHeaders = new HttpHeaders().append(
+    'Content-Type',
+    'application/json'
+  );
 
   constructor(@Inject(HttpClient) private httpClient: HttpClient) {}
 
   logout() {
     this.access_token = '';
-    this.user = null;
+    window.sessionStorage.setItem('token', '');
   }
 
   isAuthenticated() {
-    return this.access_token != '' ? true : false;
+    const token = window.sessionStorage.getItem('token') ?? this.access_token;
+    if (this.access_token == '' && window.sessionStorage.getItem('token') != '')
+      this.access_token = token;
+    return token != '' ? true : false;
   }
 
   authenticate(
-    user: UserLoginDTO
-  ): Promise<{ success: boolean; errorMessage: string }> {
-    return new Promise<{ success: boolean; errorMessage: string }>(
-      (resolve, reject) => {
-        let httpError = "";
-        this.httpClient
-          .post<{ access_token: string }>(`${this.url}/login`, user, {
-            headers: { 'Content-Type': 'application/json' },
-          })
-          .subscribe({
-            next: (response) => {
-              this.access_token = response?.access_token;
-              resolve({success: this.access_token ? true : false, errorMessage: httpError});
-            },
-            error: (error: HttpErrorResponse) => {
-              if (error.status == 401)
-                httpError =
-                  'Failed to authenticate: invalid email or password.';
-              else if (error.status >= 500) httpError = 'Error: Server error.';
-              else httpError = 'Error: Unknown error';
+    user: UserLoginDTO,
+    next: (success: boolean, error: string) => void
+  ): void {
+    this.httpClient
+      .post<{ access_token: string }>(`${this.url}/login`, user, {
+        headers: this.headers,
+      })
+      .subscribe({
+        next: (response) => {
+          this.access_token = response.access_token;
+          window.sessionStorage.setItem('token', response.access_token);
+          next(true, '');
+        },
+        error: (response) => {
+          this.access_token = '';
+          window.sessionStorage.setItem('token', '');
+          console.error('something went wrong.');
+          next(false, 'Authentication Failed: Check email or password.');
+        },
+      });
+  }
 
-              resolve({success: this.access_token ? true : false, errorMessage: httpError});
-            },
-          });
+  getUserProfile(next: (user: {sub: number, username: string, iat: number, exp: number}, error: string) => void): void {
+    console.log(this.access_token)
+    this.httpClient.get<{
+      sub: number;
+      username: string;
+      iat: number;
+      exp: number;
+    }>(`${this.url}/user-profile`, {
+      headers: this.headers.append('Authorization', `Bearer ${this.access_token}`),
+    }).subscribe(
+      {
+        next: response => {
+          console.log(this.access_token);
+          next(response, '');
+        },
+        error: error => {
+          console.log('User authentication went wrong.');
+          console.log(error);
+          next({sub: -1, username: '', iat: -1, exp: -1}, 'something went wrong');
+        }
       }
     );
   }
 
-  getUserProfile(): Promise<{response: {sub?: number, username?: string, iat?: number, exp?: number}, error: string}> {
-    return new Promise<{response: {}, error: string}>((resolve, reject) => {
-      this.httpClient.get<{sub: number, username: string, iat: number, exp: number}>(`${this.url}/user-profile`, {
-        headers: {
-          "Content-Type": "application/json", 
-          "Authorization": `Bearer ${this.access_token}`
-        }
-      }).subscribe({
-        next: (response) => {
-          resolve({response, error: ""})
-        },
-        error: (error: HttpErrorResponse) => {
-          resolve({response: {}, error: error.message})
-        }
-      })
-    });
-  }
-
   getToken(): string | null {
-    if(this.isAuthenticated()) return this.access_token;
-    return null
+    if (this.isAuthenticated()) return this.access_token;
+    return null;
   }
 }
