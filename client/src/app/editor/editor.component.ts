@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Todo } from '../todos/todo.interface';
 import { TodosService } from '../todos/todos.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-editor',
@@ -16,7 +16,8 @@ export class EditorComponent implements OnInit {
 
   constructor(
     @Inject(TodosService) private todosService: TodosService, 
-    @Inject(ActivatedRoute) private route: ActivatedRoute
+    @Inject(ActivatedRoute) private route: ActivatedRoute,
+    @Inject(Router) private router: Router
     ) {}
 
   ngOnInit(): void {
