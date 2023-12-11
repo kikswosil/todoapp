@@ -14,21 +14,40 @@ export const routes: Routes = [
   {
     path: 'app',
     component: MainComponent,
-    title: 'Todo app'
+    title: 'Todo app',
+    // children: [
+    //   {
+    //     path: 'edit/',
+    //     component: EditorComponent,
+    //     title: 'create a todo'
+    //   },
+    //   {
+    //     path: 'edit/:id',
+    //     component: EditorComponent,
+    //     title: 'edit a todo'
+    //   }
+    // ]
   },
   {
     path: 'logout',
     component: LogoutComponent,
     title: 'logging out.'
   },
+  // remove this when ready.
   {
-    path: 'app/edit/',
-    component: EditorComponent,
-    title: 'edit todo'
-  },
-  {
-    path: 'app/edit/:id',
-    component: EditorComponent,
-    title: 'edit todo'
+    path: 'dev',
+    title: 'dev-editor',
+    children: [
+      {
+        path: 'edit',
+        component: EditorComponent,
+        title: 'create a todo.'
+      },
+      {
+        path: 'edit/:id',
+        component: EditorComponent,
+        title: 'edit a todo'
+      }
+    ]
   }
 ];
