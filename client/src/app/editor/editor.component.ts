@@ -24,7 +24,7 @@ export class EditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.todosService.getTodosForUser().then(response => {
-      this.todo = response.todos.find(todo => todo.id == Number(this.route.snapshot.paramMap.get('id'))) ?? {title: '', details: '', isDone: false};
+      this.todo = response.todos.find(todo => todo.id == Number(this.route.snapshot.paramMap.get('id'))) ?? this.todo;
     });
   }
 
