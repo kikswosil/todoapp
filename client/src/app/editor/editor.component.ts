@@ -23,8 +23,8 @@ export class EditorComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
-    this.todosService.getTodosForUser().then(response => {
-      this.todo = response.todos.find(todo => todo.id == Number(this.route.snapshot.paramMap.get('id'))) ?? this.todo;
+    this.todosService.getTodosForUser().then(({todos}) => {
+      this.todo = todos.find(todo => todo.id == Number(this.route.snapshot.paramMap.get('id'))) ?? this.todo;
     });
   }
 
