@@ -17,7 +17,6 @@ import { UserService } from '../user/user.service';
 export class MainComponent implements OnInit{
   username: string | undefined = '';
 
-  // make this fetch from the server.
   todos: Todo[] = [];
 
   constructor(
