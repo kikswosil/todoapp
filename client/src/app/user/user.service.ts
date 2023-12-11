@@ -69,12 +69,9 @@ export class UserService {
     }).subscribe(
       {
         next: response => {
-          console.log(this.access_token);
           next(response, '');
         },
         error: error => {
-          console.log('User authentication went wrong.');
-          console.log(error);
           next({sub: -1, username: '', iat: -1, exp: -1}, 'something went wrong');
         }
       }

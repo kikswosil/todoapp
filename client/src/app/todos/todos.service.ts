@@ -20,7 +20,6 @@ export class TodosService {
     next: (todos: TodoResponse[], error: string) => void
   ): void {
     this.userService.getUserProfile((user, error) => {
-      console.log(user);
       if (error) console.log(error);
       else
         this.httpClient
