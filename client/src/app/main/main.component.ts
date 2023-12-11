@@ -26,11 +26,15 @@ export class MainComponent implements OnInit{
     private router: Router
     ) {}
 
-  async ngOnInit(): Promise<void> {
-    // for development purposes disabled this line. uncomment it later.
+  ngOnInit(): void {
     if(!this.userService.isAuthenticated()) this.router.navigate(['']);
-    const {response, error} = await this.userService.getUserProfile();
-    this.username = response?.username;
-    this.todos = (await this.todosService.getTodosForUser()).todos;
+    this.userService.getUserProfile((user, error) => {
+      if(error) console.log(error);
+      else this.username = user.username;
+    });
+    this.todosService.getTodosForUser((todos, error) => {
+      if(error) console.log(error);
+      else this.todos = todos;
+    });
   }
 }
