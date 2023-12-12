@@ -23,9 +23,11 @@ export class EditorComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
-    // this.todosService.getTodosForUser().then(({todos}) => {
-    //   this.todo = todos.find(todo => todo.id == Number(this.route.snapshot.paramMap.get('id'))) ?? this.todo;
-    // });
+    const todoId = Number(this.route.snapshot.paramMap.get('id'));
+    this.todosService.getTodosForUser((todos, error) => {
+      if(error) return console.log(error);
+      else this.todo = todos.find(todo => todo.id == todoId) ?? this.todo;
+    });
   }
 
   onSubmit(form: NgForm) {

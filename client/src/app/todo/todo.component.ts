@@ -1,18 +1,13 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  HostListener,
-  Input,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Todo } from '../todos/todo.interface';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output
+} from '@angular/core';
 import { DropdownComponent } from "../dropdown/dropdown.component";
 import { Option } from '../dropdown/option.interface';
+import { Todo } from '../todos/todo.interface';
 
 @Component({
     selector: 'app-todo',
@@ -49,6 +44,7 @@ export class TodoComponent {
       callback: () => {
         console.log('edit')
         // make it open the editor
+
       }
     }
   ];

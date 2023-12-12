@@ -4,7 +4,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("../../assets/webb-dark.png");
+  /* background-image: url("../../assets/webb-dark.png"); */
+  background-color: #dfd9df;
 }
 
 @media screen and (min-width: 800px) {
