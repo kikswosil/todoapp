@@ -14,7 +14,7 @@ import { FormsModule, NgForm } from '@angular/forms';
   styleUrl: './editor.component.css'
 })
 export class EditorComponent implements OnInit {
-  todo: Todo = {title: '', details: '', isDone: false};
+  todo: Todo = {id: -1, title: '', details: '', isDone: false};
 
   constructor(
     @Inject(TodosService) private todosService: TodosService, 

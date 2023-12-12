@@ -48,9 +48,8 @@ export class TodoComponent {
     {
       text: 'edit',
       callback: () => {
-        console.log('edit')
         // make it open the editor
-        this.router.navigate(['/edit', {id: this.todo.id}]);
+        this.router.navigate(['/app/edit/:id', {id: this.todo.id}]);
       }
     }
   ];

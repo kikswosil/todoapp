@@ -13,35 +13,16 @@ export const routes: Routes = [
   },
   {
     path: 'app',
-    component: MainComponent,
-    title: 'Todo app',
-    // children: [
-    //   {
-    //     path: 'edit/',
-    //     component: EditorComponent,
-    //     title: 'create a todo'
-    //   },
-    //   {
-    //     path: 'edit/:id',
-    //     component: EditorComponent,
-    //     title: 'edit a todo'
-    //   }
-    // ]
-  },
-  {
-    path: 'logout',
-    component: LogoutComponent,
-    title: 'logging out.'
-  },
-  // remove this when ready.
-  {
-    path: 'dev',
-    title: 'dev-editor',
     children: [
       {
-        path: 'edit',
+        path: '',
+        component: MainComponent,
+        title: 'todo app'
+      },
+      {
+        path: 'edit/',
         component: EditorComponent,
-        title: 'create a todo.'
+        title: 'create a todo'
       },
       {
         path: 'edit/:id',
@@ -49,5 +30,10 @@ export const routes: Routes = [
         title: 'edit a todo'
       }
     ]
-  }
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent,
+    title: 'logging out.'
+  },
 ];
