@@ -7,6 +7,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
+import { UserResponse } from './user-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ import { Observable, Subscription } from 'rxjs';
 export class UserService {
   private url = 'http://localhost:3000/api/auth';
   private access_token = '';
+  private user: UserResponse = {sub: -1, username: '', iat: -1, exp: -1};
 
   private headers: HttpHeaders = new HttpHeaders().append(
     'Content-Type',
@@ -57,21 +59,18 @@ export class UserService {
       });
   }
 
-  getUserProfile(next: (user: {sub: number, username: string, iat: number, exp: number}, error: string) => void): void {
-    console.log(this.access_token)
-    this.httpClient.get<{
-      sub: number;
-      username: string;
-      iat: number;
-      exp: number;
-    }>(`${this.url}/user-profile`, {
+  getUserProfile(next: (user: UserResponse, error: string) => void): void {
+    if(this.user.sub != -1) return next(this.user, '');
+    this.httpClient.get<UserResponse>(`${this.url}/user-profile`, {
       headers: this.headers.append('Authorization', `Bearer ${this.access_token}`),
     }).subscribe(
       {
         next: response => {
+          this.user = response;
           next(response, '');
         },
         error: error => {
+          this.user = {sub: -1, username: '', iat: -1, exp: -1};
           next({sub: -1, username: '', iat: -1, exp: -1}, 'something went wrong');
         }
       }
