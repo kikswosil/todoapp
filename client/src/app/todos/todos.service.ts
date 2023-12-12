@@ -8,8 +8,10 @@ import { TodoResponse } from './todo-response.interface';
 })
 export class TodosService {
   private url: string = 'http://localhost:3000/api/todos';
-  private headers: HttpHeaders = new HttpHeaders()
-    .append('Content-Type', 'application/json')
+  private headers: HttpHeaders = new HttpHeaders().append(
+    'Content-Type',
+    'application/json'
+  );
 
   constructor(
     @Inject(UserService) private userService: UserService,
@@ -24,7 +26,10 @@ export class TodosService {
       else
         this.httpClient
           .get<TodoResponse[]>(`${this.url}/${user.sub}`, {
-            headers: this.headers.append('Authorization', `Bearer ${this.userService.getToken()}`),
+            headers: this.headers.append(
+              'Authorization',
+              `Bearer ${this.userService.getToken()}`
+            ),
           })
           .subscribe({
             next: (response) => {

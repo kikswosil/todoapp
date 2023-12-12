@@ -1,12 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
 import { UserLoginDTO } from './user-login-dto';
-import { User } from './user.interface';
 import {
   HttpClient,
-  HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
 import { UserResponse } from './user-response.interface';
 
 @Injectable({
@@ -15,7 +12,7 @@ import { UserResponse } from './user-response.interface';
 export class UserService {
   private url = 'http://localhost:3000/api/auth';
   private access_token = '';
-  private user: UserResponse = {sub: -1, username: '', iat: -1, exp: -1};
+  private user: UserResponse = { sub: -1, username: '', iat: -1, exp: -1 };
 
   private headers: HttpHeaders = new HttpHeaders().append(
     'Content-Type',
@@ -53,28 +50,33 @@ export class UserService {
         error: (response) => {
           this.access_token = '';
           window.sessionStorage.setItem('token', '');
-          console.error('something went wrong.');
           next(false, 'Authentication Failed: Check email or password.');
         },
       });
   }
 
   getUserProfile(next: (user: UserResponse, error: string) => void): void {
-    if(this.user.sub != -1) return next(this.user, '');
-    this.httpClient.get<UserResponse>(`${this.url}/user-profile`, {
-      headers: this.headers.append('Authorization', `Bearer ${this.access_token}`),
-    }).subscribe(
-      {
-        next: response => {
+    if (this.user.sub != -1) return next(this.user, '');
+    this.httpClient
+      .get<UserResponse>(`${this.url}/user-profile`, {
+        headers: this.headers.append(
+          'Authorization',
+          `Bearer ${this.access_token}`
+        ),
+      })
+      .subscribe({
+        next: (response) => {
           this.user = response;
           next(response, '');
         },
-        error: error => {
-          this.user = {sub: -1, username: '', iat: -1, exp: -1};
-          next({sub: -1, username: '', iat: -1, exp: -1}, 'something went wrong');
-        }
-      }
-    );
+        error: (error) => {
+          this.user = { sub: -1, username: '', iat: -1, exp: -1 };
+          next(
+            { sub: -1, username: '', iat: -1, exp: -1 },
+            'something went wrong'
+          );
+        },
+      });
   }
 
   getToken(): string | null {
