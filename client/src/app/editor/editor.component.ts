@@ -20,7 +20,9 @@ export class EditorComponent implements OnInit {
     @Inject(TodosService) private todosService: TodosService,
     @Inject(ActivatedRoute) private route: ActivatedRoute,
     @Inject(Router) private router: Router
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     const todoId = Number(this.route.snapshot.paramMap.get('id'));
     this.todosService.getTodosForUser((todos, error) => {
       if (error) return console.log(error);
@@ -28,10 +30,12 @@ export class EditorComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
-
   onSubmit(form: NgForm) {
     if (!form.valid) return;
     console.log(this.todo);
+  }
+
+  cancelEdit() {
+    this.router.navigate(['/app']);
   }
 }

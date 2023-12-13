@@ -14,6 +14,7 @@
                 <textarea type="text" name="details" [(ngModel)]="todo.details" id="title"></textarea>
             </div>
             <button type="submit">done.</button>
+            <button (click)="cancelEdit()">cancel</button>
         </form>
     </div>
 </section>

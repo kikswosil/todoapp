@@ -23,7 +23,9 @@ export class MainComponent implements OnInit {
     @Inject(UserService) private userService: UserService,
     @Inject(TodosService) private todosService: TodosService,
     private router: Router
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     if (!this.userService.isAuthenticated()) this.router.navigate(['']);
     this.userService.getUserProfile((user, error) => {
       if (error) console.log(error);
@@ -34,6 +36,4 @@ export class MainComponent implements OnInit {
       else this.todos = todos;
     });
   }
-
-  ngOnInit(): void {}
 }
