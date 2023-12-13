@@ -21,19 +21,23 @@ export class UserService {
 
   constructor(@Inject(HttpClient) private httpClient: HttpClient) {}
 
-  logout() {
+  public logout() {
     this.access_token = '';
     window.sessionStorage.setItem('token', '');
+    window.sessionStorage.setItem('user', '');
   }
 
-  isAuthenticated() {
+  private isDefaultUser(user: any) {
+    return user?.exp == -1 && user?.iat == -1 && user?.sub == -1 && user?.username == '';
+  }
+
+  public isAuthenticated() {
     const token = window.sessionStorage.getItem('token') ?? this.access_token;
-    if (this.access_token == '' && window.sessionStorage.getItem('token') != '')
-      this.access_token = token;
-    return token != '' ? true : false;
+    if(token) return token;
+    return null;
   }
 
-  authenticate(
+  public authenticate(
     user: UserLoginDTO,
     next: (success: boolean, error: string) => void
   ): void {
@@ -55,8 +59,18 @@ export class UserService {
       });
   }
 
-  getUserProfile(next: (user: UserResponse, error: string) => void): void {
-    if (this.user.sub != -1) return next(this.user, '');
+  private readUserFromSessionOrDefault(): UserResponse {
+    try{
+      return JSON.parse(window.sessionStorage.getItem('user') ?? '{}')?.user ?? this.user;
+    }
+    catch(error) {
+      return {sub: -1, username: '', exp: -1, iat: -1};
+    }
+  }
+
+  public getUserProfile(next: (user: UserResponse, error: string) => void): void {
+    const user = this.readUserFromSessionOrDefault();
+    if (!this.isDefaultUser(user)) return next(user, '');
     this.httpClient
       .get<UserResponse>(`${this.url}/user-profile`, {
         headers: this.headers.append(
@@ -67,20 +81,17 @@ export class UserService {
       .subscribe({
         next: (response) => {
           this.user = response;
+          window.sessionStorage.setItem('user', JSON.stringify({user: response}));
           next(response, '');
         },
         error: (error) => {
           this.user = { sub: -1, username: '', iat: -1, exp: -1 };
+          window.sessionStorage.setItem('user', JSON.stringify({user: this.user}));
           next(
             { sub: -1, username: '', iat: -1, exp: -1 },
             'something went wrong'
           );
         },
       });
-  }
-
-  getToken(): string | null {
-    if (this.isAuthenticated()) return this.access_token;
-    return null;
   }
 }

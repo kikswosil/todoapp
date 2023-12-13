@@ -12,28 +12,28 @@ import { UserService } from '../user/user.service';
   providers: [TodosService],
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrl: './main.component.css'
+  styleUrl: './main.component.css',
 })
-export class MainComponent implements OnInit{
+export class MainComponent implements OnInit {
   username: string | undefined = '';
 
   todos: Todo[] = [];
 
   constructor(
-    @Inject(UserService) private userService: UserService, 
+    @Inject(UserService) private userService: UserService,
     @Inject(TodosService) private todosService: TodosService,
     private router: Router
-    ) {}
-
-  ngOnInit(): void {
-    if(!this.userService.isAuthenticated()) this.router.navigate(['']);
+  ) {
+    if (!this.userService.isAuthenticated()) this.router.navigate(['']);
     this.userService.getUserProfile((user, error) => {
-      if(error) console.log(error);
+      if (error) console.log(error);
       else this.username = user.username;
     });
     this.todosService.getTodosForUser((todos, error) => {
-      if(error) console.log(error);
+      if (error) console.log(error);
       else this.todos = todos;
     });
   }
+
+  ngOnInit(): void {}
 }

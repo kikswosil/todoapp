@@ -28,7 +28,7 @@ export class TodosService {
           .get<TodoResponse[]>(`${this.url}/${user.sub}`, {
             headers: this.headers.append(
               'Authorization',
-              `Bearer ${this.userService.getToken()}`
+              `Bearer ${this.userService.isAuthenticated()}`
             ),
           })
           .subscribe({
