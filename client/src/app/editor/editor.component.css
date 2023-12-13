@@ -6,6 +6,14 @@ section {
     border-radius: 5px;
     padding: 10px;
     background-color: white;
+    
+    width: 80vw;
+}
+
+@media screen and (max-width: 500px) {
+    section {
+        width: calc(100% - 30px);
+    } 
 }
 
 section > form {
