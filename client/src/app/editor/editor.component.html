@@ -5,16 +5,18 @@
             <h1 *ngIf="!todo">Create a new todo</h1>
         </div>
         <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-            <div>
+            <div class="input">
                 <label for="title">title: </label>
                 <input type="text" name="title" [(ngModel)]="todo.title" id="title" />
             </div>
-            <div>
+            <div class="input">
                 <label for="details">details: </label>
                 <textarea type="text" name="details" [(ngModel)]="todo.details" id="title"></textarea>
             </div>
-            <button type="submit">done.</button>
-            <button (click)="cancelEdit()">cancel</button>
+            <div class="buttons">
+                <button type="submit">save</button>
+                <button (click)="cancelEdit()">cancel</button>
+            </div>
         </form>
     </div>
 </section>

@@ -27,13 +27,26 @@
     width: 50%;
 }
 
-.editor > form > div {
+.editor > form > .input {
     display: flex;
     flex-direction: column;
 }
 
 .editor > form > div > label {
     margin: 5px 0px 5px 0px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 15px 0px 5px 0px;
+}
+
+.buttons > button {
+    width: 45%;
 }
 
 textarea {
