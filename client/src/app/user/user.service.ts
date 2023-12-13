@@ -61,7 +61,7 @@ export class UserService {
 
   private readUserFromSessionOrDefault(): UserResponse {
     try{
-      return JSON.parse(window.sessionStorage.getItem('user') ?? '{}')?.user ?? this.user;
+      return JSON.parse(window.sessionStorage.getItem('user')!)?.user;
     }
     catch(error) {
       return {sub: -1, username: '', exp: -1, iat: -1};
