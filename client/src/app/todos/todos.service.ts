@@ -44,6 +44,32 @@ export class TodosService {
   }
 
   public createTodo(todo: Todo, next: (response: any, error: string) => void) {
-    
+    this.userService.getUserProfile((user, error) => {
+      if(error) console.error('something went wrong, when getting user profile.');
+      else this.httpClient.post<TodoResponse>(
+        this.url,
+        {
+          ...todo,
+          authorId: user.sub
+        },
+        {
+          headers: this.headers.append(
+            'Authorization',
+            `Bearer ${this.userService.isAuthenticated()}`
+          )
+        }
+      ).subscribe(
+        {
+          next: response => {
+            console.log('success');
+            next(response, '');
+          },
+          error: error => {
+            console.error('could not create a todo.', error);
+            next({}, error);
+          }
+        }
+      );
+    }) 
   }
 }
