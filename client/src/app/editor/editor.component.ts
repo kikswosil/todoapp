@@ -25,20 +25,28 @@ export class EditorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const todoId = Number(this.route.snapshot.paramMap.get('id'));
+    const IdStr: string = this.route.snapshot.paramMap.get('id') ?? 'create';
 
-    if(!isNaN(todoId)) this.todosService.getTodosForUser((todos, error) => {
+    this.editorType = IdStr == 'create' ? 'creator' : 'editor';
+
+    if(this.editorType == 'editor') this.todosService.getTodosForUser((todos, error) => {
       if (error) return console.log(error);
       else {
-        this.editorType = 'editor';
-        this.todo = todos.find((todo) => todo.id == todoId) ?? this.todo;
+        this.todo = todos.find((todo) => todo.id == Number(IdStr)) ?? this.todo;
       }
+    });
+  }
+
+  private createTodo() {
+    this.todosService.createTodo(this.todo, (todo, error) => {
+      if(error) console.log(error);
+      else console.log('created todo: ', todo); 
     });
   }
 
   onSubmit(form: NgForm) {
     if (!form.valid) return;
-    if(this.editorType == 'creator') console.log('sending create request.', this.todo);
+    if(this.editorType == 'creator') this.createTodo();
     if(this.editorType == 'editor') console.log('sending update request', this.todo);
   }
 

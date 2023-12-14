@@ -44,12 +44,14 @@ export class TodosService {
   }
 
   public createTodo(todo: Todo, next: (response: any, error: string) => void) {
+    const {id, ...cleanTodo} = todo;
+
     this.userService.getUserProfile((user, error) => {
       if(error) console.error('something went wrong, when getting user profile.');
       else this.httpClient.post<TodoResponse>(
         this.url,
         {
-          ...todo,
+          ...cleanTodo,
           authorId: user.sub
         },
         {
