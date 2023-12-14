@@ -20,7 +20,6 @@ export class UserService {
   constructor(@Inject(HttpClient) private httpClient: HttpClient) {}
 
   public logout() {
-    // this.access_token = '';
     window.sessionStorage.setItem('token', '');
     window.sessionStorage.setItem('user', '');
   }
@@ -30,7 +29,6 @@ export class UserService {
   }
 
   public isAuthenticated() {
-    // const token = window.sessionStorage.getItem('token') ?? this.access_token;
     const token = window.sessionStorage.getItem('token');
     if(token) return token;
     return null;
@@ -46,12 +44,10 @@ export class UserService {
       })
       .subscribe({
         next: (response) => {
-          // this.access_token = response.access_token;
           window.sessionStorage.setItem('token', response.access_token);
           next(true, '');
         },
         error: (response) => {
-          // this.access_token = '';
           window.sessionStorage.setItem('token', '');
           next(false, 'Authentication Failed: Check email or password.');
         },
