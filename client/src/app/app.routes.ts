@@ -20,7 +20,7 @@ export const routes: Routes = [
         title: 'todo app'
       },
       {
-        path: 'edit/',
+        path: 'edit/create',
         component: EditorComponent,
         title: 'create a todo'
       },
