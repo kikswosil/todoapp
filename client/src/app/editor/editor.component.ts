@@ -16,6 +16,8 @@ import { FormsModule, NgForm } from '@angular/forms';
 export class EditorComponent implements OnInit {
   todo: Todo = { id: -1, title: '', details: '', isDone: false };
 
+  editorType: 'creator' | 'editor' = 'creator';
+
   constructor(
     @Inject(TodosService) private todosService: TodosService,
     @Inject(ActivatedRoute) private route: ActivatedRoute,
@@ -24,15 +26,20 @@ export class EditorComponent implements OnInit {
 
   ngOnInit(): void {
     const todoId = Number(this.route.snapshot.paramMap.get('id'));
-    this.todosService.getTodosForUser((todos, error) => {
+
+    if(!isNaN(todoId)) this.todosService.getTodosForUser((todos, error) => {
       if (error) return console.log(error);
-      else this.todo = todos.find((todo) => todo.id == todoId) ?? this.todo;
+      else {
+        this.editorType = 'editor';
+        this.todo = todos.find((todo) => todo.id == todoId) ?? this.todo;
+      }
     });
   }
 
   onSubmit(form: NgForm) {
     if (!form.valid) return;
-    console.log(this.todo);
+    if(this.editorType == 'creator') console.log('sending create request.', this.todo);
+    if(this.editorType == 'editor') console.log('sending update request', this.todo);
   }
 
   cancelEdit() {
