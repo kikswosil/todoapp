@@ -11,8 +11,6 @@ import { UserResponse } from './user-response.interface';
 })
 export class UserService {
   private url = 'http://localhost:3000/api/auth';
-  private access_token = '';
-  private user: UserResponse = { sub: -1, username: '', iat: -1, exp: -1 };
 
   private headers: HttpHeaders = new HttpHeaders().append(
     'Content-Type',
@@ -22,7 +20,7 @@ export class UserService {
   constructor(@Inject(HttpClient) private httpClient: HttpClient) {}
 
   public logout() {
-    this.access_token = '';
+    // this.access_token = '';
     window.sessionStorage.setItem('token', '');
     window.sessionStorage.setItem('user', '');
   }
@@ -32,7 +30,8 @@ export class UserService {
   }
 
   public isAuthenticated() {
-    const token = window.sessionStorage.getItem('token') ?? this.access_token;
+    // const token = window.sessionStorage.getItem('token') ?? this.access_token;
+    const token = window.sessionStorage.getItem('token');
     if(token) return token;
     return null;
   }
@@ -47,12 +46,12 @@ export class UserService {
       })
       .subscribe({
         next: (response) => {
-          this.access_token = response.access_token;
+          // this.access_token = response.access_token;
           window.sessionStorage.setItem('token', response.access_token);
           next(true, '');
         },
         error: (response) => {
-          this.access_token = '';
+          // this.access_token = '';
           window.sessionStorage.setItem('token', '');
           next(false, 'Authentication Failed: Check email or password.');
         },
@@ -75,18 +74,16 @@ export class UserService {
       .get<UserResponse>(`${this.url}/user-profile`, {
         headers: this.headers.append(
           'Authorization',
-          `Bearer ${this.access_token}`
+          `Bearer ${window.sessionStorage.getItem('token')}`
         ),
       })
       .subscribe({
         next: (response) => {
-          this.user = response;
           window.sessionStorage.setItem('user', JSON.stringify({user: response}));
           next(response, '');
         },
         error: (error) => {
-          this.user = { sub: -1, username: '', iat: -1, exp: -1 };
-          window.sessionStorage.setItem('user', JSON.stringify({user: this.user}));
+          window.sessionStorage.setItem('user', JSON.stringify({user: {sub: -1, username: '', iat: -1, exp: -1}}));
           next(
             { sub: -1, username: '', iat: -1, exp: -1 },
             'something went wrong'
