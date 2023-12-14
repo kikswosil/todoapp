@@ -51,6 +51,12 @@ export class TodoComponent {
         // make it open the editor
         this.router.navigate([`/app/edit/${this.todo.id}`]);
       }
+    },
+    {
+      text: 'delete',
+      callback: () => {
+        console.log('delete');
+      }
     }
   ];
 }
