@@ -6,11 +6,15 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div>
-      <h1 style="margin-top: 150px;">Could not find page.</h1>
-      <p>The page you're looking for does not exist (or does not exist yet.)</p>
-      <a href="/">back to the front page.</a>
-    </div>
+    <section>
+      <div>
+        <h1>Could not find page.</h1>
+        <p>
+          The page you're looking for does not exist (or does not exist yet.)
+        </p>
+        <a href="/">back to the front page.</a>
+      </div>
+    </section>
   `,
   styleUrl: './page-not-found.component.css',
 })
