@@ -1,16 +1,19 @@
 <div class="wrapper">
-<section class="top-section">
-    <h1>Hello {{ username }}!</h1>
-    <div>
-        <span *ngIf="todos.length == 0">There's nothing to do.</span>
-        <span *ngIf="todos.length == 1">There's something to do.</span>
-        <span *ngIf="todos.length > 1">There's a lot to do.</span>
-        <a href="/logout" routerLinkActive="router-link-active" >log out <img src="../../assets/logout-svgrepo-com.svg" alt="logout"></a>
-        <a href="/app/edit/create">create a new todo.</a>
-    </div>
-</section>
-<section class="todo-section">
-    <!-- render todos here. -->
-    <app-todo *ngFor="let todo of todos; let i = index" [(todo)]="todos[i]"></app-todo>
-</section>
+    <section class="top-section">
+        <h1>Hello {{ username }}!</h1>
+        <div>
+            <span *ngIf="todos.length == 0">There's nothing to do.</span>
+            <span *ngIf="todos.length == 1">There's something to do.</span>
+            <span *ngIf="todos.length > 1">There's a lot to do.</span>
+            <div>
+                <a href="/app/edit/create">new todo</a>
+                <a href="/logout" routerLinkActive="router-link-active">log out <img
+                        src="../../assets/logout-svgrepo-com.svg" alt="logout"></a>
+            </div>
+        </div>
+    </section>
+    <section class="todo-section">
+        <!-- render todos here. -->
+        <app-todo *ngFor="let todo of todos; let i = index" [(todo)]="todos[i]"></app-todo>
+    </section>
 </div>
