@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { UserService } from '../user/user.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TodoResponse } from './todo-response.interface';
+import { Todo } from './todo.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -40,5 +41,9 @@ export class TodosService {
             },
           });
     });
+  }
+
+  public createTodo(todo: Todo, next: (response: any, error: string) => void) {
+    
   }
 }
