@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { LogoutComponent } from './logout/logout.component';
 import { EditorComponent } from './editor/editor.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 export const routes: Routes = [
   {
@@ -36,4 +37,10 @@ export const routes: Routes = [
     component: LogoutComponent,
     title: 'logging out.'
   },
+  {
+    path: '**',
+    pathMatch: 'full',
+    component: PageNotFoundComponent,
+    title: 'page not found'
+  }
 ];
