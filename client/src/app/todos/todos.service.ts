@@ -75,7 +75,7 @@ export class TodosService {
     }) 
   }
 
-  public deleteTodo(id: number, next: (response: any, error: string) => void) {
+  public deleteTodo(id: number, next: (response: any, error: any) => void) {
     console.log(id);
     this.userService.getUserProfile((user, error) => {
       if(error) return console.log(error); 
@@ -95,5 +95,9 @@ export class TodosService {
         }
       );
     });
+  }
+
+  public updateTodo(id: number, newTodo: Todo, (response: any, error: any) => void) {
+    
   }
 }
