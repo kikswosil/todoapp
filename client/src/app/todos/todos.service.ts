@@ -76,6 +76,23 @@ export class TodosService {
   }
 
   public deleteTodo(id: number, next: (response: any, error: string) => void) {
-    
+    this.userService.getUserProfile((user, error) => {
+      if(error) return console.log(error); 
+      else this.httpClient.delete<any>(
+        `${this.url}/${id}`,
+        {
+          headers: this.headers.append('Authorization', `Bearer ${this.userService.isAuthenticated()}`)
+        },
+      ).subscribe(
+        {
+          next: response => {
+            next(response, '');
+          },
+          error: error => {
+            next({}, error);
+          }
+        }
+      );
+    });
   }
 }
