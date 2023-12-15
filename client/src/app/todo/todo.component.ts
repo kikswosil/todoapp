@@ -10,6 +10,7 @@ import { DropdownComponent } from "../dropdown/dropdown.component";
 import { Option } from '../dropdown/option.interface';
 import { Todo } from '../todos/todo.interface';
 import { Router } from '@angular/router';
+import { TodosService } from '../todos/todos.service';
 
 @Component({
     selector: 'app-todo',
@@ -32,6 +33,7 @@ export class TodoComponent {
   @Output() todoChange: EventEmitter<Todo> = new EventEmitter<Todo>();
 
   constructor(
+    @Inject(TodosService) private todosService: TodosService,
     @Inject(Router) private router: Router
   ) {}
 
