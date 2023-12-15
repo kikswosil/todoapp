@@ -74,4 +74,8 @@ export class TodosService {
       );
     }) 
   }
+
+  public deleteTodo(id: number, next: (response: any, error: string) => void) {
+    
+  }
 }
