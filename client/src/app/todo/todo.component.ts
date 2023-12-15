@@ -30,7 +30,6 @@ import { TodosService } from '../todos/todos.service';
 })
 export class TodoComponent {
   @Input({ required: true }) todo!: Todo;
-  @Output() todoChange: EventEmitter<Todo> = new EventEmitter<Todo>();
   @Output() refresh: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
@@ -45,7 +44,10 @@ export class TodoComponent {
         console.log('done')
         this.todo.isDone = true;
         // add an http request here.
-        this.todoChange.emit(this.todo);
+        this.todosService.updateTodo(this.todo.id, this.todo, (response, error) => {
+          if(error) return console.log(error);
+          this.refresh.emit();
+        });
       }
     },
     {
@@ -59,7 +61,6 @@ export class TodoComponent {
       callback: () => {
         this.todosService.deleteTodo(this.todo.id, (response, error) => {
           if(error) return console.log(error);
-          this.todoChange.emit();
           this.refresh.emit();
         });
       }

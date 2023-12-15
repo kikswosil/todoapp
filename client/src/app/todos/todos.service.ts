@@ -76,10 +76,9 @@ export class TodosService {
   }
 
   public deleteTodo(id: number, next: (response: any, error: any) => void) {
-    console.log(id);
     this.userService.getUserProfile((user, error) => {
       if(error) return console.log(error); 
-      else this.httpClient.delete<any>(
+      this.httpClient.delete<any>(
         `${this.url}/${id}`,
         {
           headers: this.headers.append('Authorization', `Bearer ${this.userService.isAuthenticated()}`)
@@ -97,7 +96,29 @@ export class TodosService {
     });
   }
 
-  public updateTodo(id: number, newTodo: Todo, next: (response: any, error: any) => void) {
-
+  public updateTodo(todoId: number, newTodo: Todo, next: (response: any, error: any) => void) {
+    const {id, ...cleanTodo} = newTodo;
+    this.userService.getUserProfile((user, error) => {
+      if(error) return console.log(error);
+      this.httpClient.put(
+        `${this.url}/${todoId}`,
+        cleanTodo, 
+        {
+          headers: this.headers.append(
+            'Authorization',
+            `Bearer ${this.userService.isAuthenticated()}`
+          )
+        },
+      ).subscribe(
+        {
+          next: response => {
+            next(response, '');
+          },
+          error: error => {
+            next({}, error);
+          }
+        }
+      )
+    });
   }
 }

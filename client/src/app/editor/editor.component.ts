@@ -47,7 +47,10 @@ export class EditorComponent implements OnInit {
   onSubmit(form: NgForm) {
     if (!form.valid) return;
     if(this.editorType == 'creator') this.createTodo();
-    if(this.editorType == 'editor') console.log('sending update request', this.todo);
+    if(this.editorType == 'editor') this.todosService.updateTodo(this.todo.id, this.todo, (response, error) => {
+      if(error) return console.log(error);
+      this.router.navigate(['/app']);
+    });
   }
 
   cancelEdit() {

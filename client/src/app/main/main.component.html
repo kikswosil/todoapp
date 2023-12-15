@@ -15,8 +15,8 @@
     <section class="todo-section">
         <!-- render todos here. -->
         <app-todo 
-            *ngFor="let todo of todos; let i = index" 
-            [(todo)]="todos[i]"
+            *ngFor="let todo of todos" 
+            [todo]="todo"
             (refresh)="refetch()"
             >
         </app-todo>
