@@ -65,7 +65,7 @@ export class UserService {
 
   public getUserProfile(next: (user: UserResponse, error: string) => void): void {
     const user = this.readUserFromSessionOrDefault();
-    if (!this.isDefaultUser(user)) return next(user, '');
+    if (!this.isDefaultUser(user) && user) return next(user, '');
     this.httpClient
       .get<UserResponse>(`${this.url}/user-profile`, {
         headers: this.headers.append(

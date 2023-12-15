@@ -35,5 +35,6 @@ export class DropdownComponent {
   public noPropagationClick(event: Event, callback: Function) {
     event.stopPropagation();
     callback();
+    this.isListOpen = false;
   }
 }

@@ -31,6 +31,10 @@ export class MainComponent implements OnInit {
       if (error) console.log(error);
       else this.username = user.username;
     });
+    this.refetch();
+  }
+
+  public refetch() {
     this.todosService.getTodosForUser((todos, error) => {
       if (error) console.log(error);
       else this.todos = todos;

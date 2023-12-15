@@ -31,6 +31,7 @@ import { TodosService } from '../todos/todos.service';
 export class TodoComponent {
   @Input({ required: true }) todo!: Todo;
   @Output() todoChange: EventEmitter<Todo> = new EventEmitter<Todo>();
+  @Output() refresh: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
     @Inject(TodosService) private todosService: TodosService,
@@ -58,7 +59,8 @@ export class TodoComponent {
       callback: () => {
         this.todosService.deleteTodo(this.todo.id, (response, error) => {
           if(error) return console.log(error);
-          console.log('success: ', response);
+          this.todoChange.emit();
+          this.refresh.emit();
         });
       }
     }
