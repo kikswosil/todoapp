@@ -30,12 +30,12 @@ export class TodosController {
   }
 
   @Delete('/:todoId')
-  async deleteTodo(@Param() todoId: string) {
-    return await this.todosService.deleteTodo(Number(todoId));
+  async deleteTodo(@Param() params: any) {
+    return await this.todosService.deleteTodo(Number(params?.todoId));
   }
 
   @Put('/:todoId')
-  async updateTodo(@Param() todoId: string, @Body() newTodo: TodoDto) {
-    return await this.todosService.updateTodo(Number(todoId), newTodo);
+  async updateTodo(@Param() params: any, @Body() newTodo: TodoDto) {
+    return await this.todosService.updateTodo(Number(params?.todoId), newTodo);
   }
 }

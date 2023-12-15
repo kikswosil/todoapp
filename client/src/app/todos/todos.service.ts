@@ -76,6 +76,7 @@ export class TodosService {
   }
 
   public deleteTodo(id: number, next: (response: any, error: string) => void) {
+    console.log(id);
     this.userService.getUserProfile((user, error) => {
       if(error) return console.log(error); 
       else this.httpClient.delete<any>(
