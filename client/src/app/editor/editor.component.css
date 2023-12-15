@@ -6,33 +6,56 @@
     border-radius: 5px;
     padding: 10px;
     background-color: white;
-    
+
     width: 80vw;
 }
 
 @media screen and (max-width: 500px) {
     .editor {
         width: calc(100% - 30px);
-    } 
+    }
 }
 
-.editor > form {
+.editor>form {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
 }
 
-.editor > form > button {
+.editor>form>button {
     margin-top: 10px;
     width: 50%;
 }
 
-.editor > form > .input {
+.input {
     display: flex;
     flex-direction: column;
 }
 
-.editor > form > div > label {
+.input>input,
+textarea {
+    border: none;
+    border-bottom: 1px solid grey;
+    background-color: #eee;
+    border-radius: 2px;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 5px;
+
+    animation: translate-focus-out 0.5s;
+}
+
+.input>input:focus,
+textarea:focus {
+    border: none;
+    outline: none;
+    background-color: white;
+    border-bottom: 1px solid blue;
+
+    animation: translate-focus-in 0.5s;
+}
+
+.editor>form>div>label {
     margin: 5px 0px 5px 0px;
 }
 
@@ -45,10 +68,6 @@
     margin: 15px 0px 5px 0px;
 }
 
-.buttons > button {
-    width: 45%;
-}
-
 textarea {
     resize: none;
     height: 100px;
@@ -58,4 +77,68 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@keyframes translate-focus-out {
+    from {
+        background-color: white;
+        border-bottom: 1px solid blue;
+    }
+
+    to {
+        background-color: #eee;
+        border-bottom: 1px solid grey;
+    }
+}
+
+@keyframes translate-focus-in {
+    from {
+        background-color: #eee;
+        border-bottom: 1px solid grey;
+    }
+
+    to {
+        background-color: white;
+        border-bottom: 1px solid blue;
+    }
+}
+
+.buttons>button {
+    height: 30px;
+    border: none;
+    border-radius: 2px;
+    background-image: linear-gradient(to bottom right, darkblue, purple, crimson);
+    color: #eee;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    box-shadow: 5px 5px 5px lightgray;
+    width: 45%;
+}
+
+.buttons>button:hover {
+    box-shadow: 1px 1px 5px lightgray;
+    animation: button-hover-on 0.5s ease-out;
+}
+
+.buttons>button:not(:hover) {
+    animation: button-hover-off 0.5s ease-in;
+}
+
+@keyframes button-hover-on {
+  from {
+    box-shadow: 5px 5px 5px lightgray;
+  }
+  to {
+    box-shadow: 1px 1px 5px lightgray;
+  }
+}
+
+@keyframes button-hover-off {
+  from {
+    box-shadow: 1px 1px 5px lightgray;
+  }
+  to {
+    box-shadow: 5px 5px 5px lightgray;
+  }
 }
