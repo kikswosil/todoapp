@@ -97,7 +97,7 @@ export class TodosService {
     });
   }
 
-  public updateTodo(id: number, newTodo: Todo, (response: any, error: any) => void) {
-    
+  public updateTodo(id: number, newTodo: Todo, next: (response: any, error: any) => void) {
+
   }
 }
