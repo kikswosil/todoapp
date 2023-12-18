@@ -19,15 +19,15 @@ export class AuthController {
   @SkipAuth()
   @HttpCode(HttpStatus.OK)
   @Post('login')
-  signIn(@Body() sighInDto: Record<string, any>) {
-    return this.authService.signIn(sighInDto.email, sighInDto.password);
+  signIn(@Body() signInDto: Record<string, any>) {
+    return this.authService.signIn(signInDto.email, signInDto.password);
   }
 
   @SkipAuth()
   @HttpCode(HttpStatus.CREATED)
   @Post('register')
-  signUp(@Body() sighUpDto: Record<string, any>) {
-    // add a return statement.
+  signUp(@Body() signUpDto: Record<string, any>) {
+    return this.authService.signUp(signUpDto?.username, signUpDto?.email, signUpDto?.password);
   }
 
   @Get('user-profile')
