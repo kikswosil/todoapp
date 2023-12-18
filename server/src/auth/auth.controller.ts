@@ -23,6 +23,13 @@ export class AuthController {
     return this.authService.signIn(sighInDto.email, sighInDto.password);
   }
 
+  @SkipAuth()
+  @HttpCode(HttpStatus.CREATED)
+  @Post('register')
+  signUp(@Body() sighUpDto: Record<string, any>) {
+    // add a return statement.
+  }
+
   @Get('user-profile')
   getUserProfile(@Request() req) {
     return req.user;
