@@ -39,8 +39,9 @@ export class EditorComponent implements OnInit {
 
   private createTodo() {
     this.todosService.createTodo(this.todo, (todo, error) => {
-      if(error) console.log(error);
-      else console.log('created todo: ', todo); 
+      if(error) return console.log(error);
+      console.log(todo);
+      this.router.navigate(['/app']);
     });
   }
 

@@ -26,7 +26,6 @@ export class MainComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.userService.isAuthenticated()) this.router.navigate(['']);
     this.userService.getUserProfile((user, error) => {
       if (error) console.log(error);
       else this.username = user.username;
