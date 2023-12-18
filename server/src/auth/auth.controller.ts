@@ -1,16 +1,14 @@
 import {
+  Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Post,
-  Body,
-  Get,
-  UseGuards,
-  Request,
+  Request
 } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { AuthGuard } from './auth.guard';
 import { SkipAuth } from 'src/skip-auth';
+import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
@@ -27,7 +25,11 @@ export class AuthController {
   @HttpCode(HttpStatus.CREATED)
   @Post('register')
   signUp(@Body() signUpDto: Record<string, any>) {
-    return this.authService.signUp(signUpDto?.username, signUpDto?.email, signUpDto?.password);
+    return this.authService.signUp(
+      signUpDto.username,
+      signUpDto.email,
+      signUpDto.password,
+    );
   }
 
   @Get('user-profile')
