@@ -13,4 +13,14 @@ export class UsersService {
       where: { email: email },
     });
   }
+
+  async createUser(name: string, email: string, password: string) {
+    return await this.prismaService.user.create({
+      data: {
+        name,
+        email, 
+        password
+      }
+    });
+  }
 }
