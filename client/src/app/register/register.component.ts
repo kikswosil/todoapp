@@ -18,7 +18,20 @@ export class RegisterComponent {
     passwordConfirmation: ''
   };
 
+  private checkPasswordValidity() {
+    return this.user.password === this.user.passwordConfirmation; 
+  }
+
+  private checkEmailValidity() {
+    return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(this.user.email);
+  }
+
+  private cleanUser() {
+    const {passwordConfirmation, ...user} = this.user;
+    return user;
+  }
+
   onSubmit(form: NgForm) {
-    console.log(this.user);
+    console.log(this.cleanUser());
   }
 }
