@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserRegisterDTO } from '../user/user-register-dto';
 import { FormsModule, NgForm } from '@angular/forms';
+import { UserService } from '../user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +13,12 @@ import { FormsModule, NgForm } from '@angular/forms';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+
+  constructor(
+    @Inject(UserService) private userService: UserService,
+    @Inject(Router) private router: Router
+  ) {}
+
   user: UserRegisterDTO = {
     username: '', 
     email: '', 
@@ -32,6 +40,11 @@ export class RegisterComponent {
   }
 
   onSubmit(form: NgForm) {
-    console.log(this.cleanUser());
+    // add handing invalid form.
+    if(!this.checkPasswordValidity() && !this.checkEmailValidity()) return;
+    this.userService.createUser(this.cleanUser(), (user, error) => {
+      if(error) return console.error(error);
+      this.router.navigate(['/']);
+    });
   }
 }
