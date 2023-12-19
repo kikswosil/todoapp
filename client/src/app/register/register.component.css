@@ -35,3 +35,61 @@ form > div {
     justify-content: center;
     margin: 15px 0px 15px 0px;
 }
+
+form > div > input {
+  border: none;
+  border-bottom: 1px solid grey;
+  background-color: #eee;
+  border-radius: 2px;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 5px;
+
+  animation: translate-focus-out 0.5s;
+
+}
+
+form > div > input:focus {
+  border: none;
+  outline: none;
+  background-color: white;
+  border-bottom: 1px solid blue;
+
+  animation: translate-focus-in 0.5s;
+}
+
+form > div > button {
+  width: calc(50%);
+  height: 30px;
+  border: none;
+  border-radius: 2px;
+  background-image: linear-gradient(to bottom right, darkblue, purple, crimson);
+  color: #eee;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  box-shadow: 5px 5px 5px lightgray;
+}
+
+@keyframes translate-focus-out {
+  from {
+    background-color: white;
+    border-bottom: 1px solid blue;
+  }
+  to {
+    background-color: #eee;
+    border-bottom: 1px solid grey;
+  }
+}
+
+@keyframes translate-focus-in {
+  from {
+    background-color: #eee;
+    border-bottom: 1px solid grey;
+  }
+  to {
+    background-color: white;
+    border-bottom: 1px solid blue;
+  }
+}
+
