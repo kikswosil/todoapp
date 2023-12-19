@@ -1,22 +1,22 @@
 <section>
     <div>
         <h1>Sign Up</h1>
-        <form>
+        <form #form="ngForm" (submit)="onSubmit(form)">
             <div>
                 <label for="name">username: </label>
-                <input name="name" type="text" />
+                <input [(ngModel)]="user.username" name="username"  type="text" />
             </div>
             <div>
                 <label for="email">email: </label>
-                <input name="email" type="text" />
+                <input [(ngModel)]="user.email" name="email" type="text" />
             </div>
             <div>
                 <label for="password">password: </label>
-                <input name="password" type="password" />
+                <input [(ngModel)]="user.password" name="password" type="password" />
             </div>
             <div>
                 <label for="passwordConfirmation">password confirmation: </label>
-                <input name="passwordConfirmation" type="password" />
+                <input [(ngModel)]="user.passwordConfirmation" name="passwordConfirmation" type="password" />
             </div>
             <div>
                 <a href="/">I already have an account.</a>

@@ -50,8 +50,8 @@ export class EditorComponent implements OnInit {
     if(this.editorType == 'creator') this.createTodo();
     if(this.editorType == 'editor') this.todosService.updateTodo(this.todo.id, this.todo, (response, error) => {
       if(error) return console.log(error);
-      this.router.navigate(['/app']);
     });
+    this.router.navigate(['/app']);
   }
 
   cancelEdit() {
