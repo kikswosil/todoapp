@@ -5,6 +5,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { UserResponse } from './user-response.interface';
+import { UserRegisterDTO } from './user-register-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -86,5 +87,24 @@ export class UserService {
           );
         },
       });
+  }
+
+  public createUser(user: UserRegisterDTO, next: (user: any, error: any) => void) {
+    this.httpClient.post<UserResponse>(
+      `${this.url}/register`,
+      user,
+      {
+        headers: this.headers
+      },
+    ).subscribe(
+      {
+        next: response => {
+          next(response, '');
+        },
+        error: error => {
+          next({}, error);
+        }
+      }
+    );
   }
 }
