@@ -6,12 +6,18 @@ import { LogoutComponent } from './logout/logout.component';
 import { EditorComponent } from './editor/editor.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { authenticatedGuard } from './authenticated.guard';
+import { RegisterComponent } from './register/register.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
-    title: 'Todoapp home.',
+    title: 'sign in',
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    title: 'sign up'
   },
   {
     path: 'app',
