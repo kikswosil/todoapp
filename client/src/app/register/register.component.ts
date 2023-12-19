@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { UserRegisterDTO } from '../user/user-register-dto';
 
 @Component({
   selector: 'app-register',
@@ -9,5 +10,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-  
+  user: UserRegisterDTO = {
+    username: '', 
+    email: '', 
+    password: '', 
+    passwordConfirmation: ''
+  };
 }
