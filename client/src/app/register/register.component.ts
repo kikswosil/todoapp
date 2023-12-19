@@ -9,5 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-
+  
 }
