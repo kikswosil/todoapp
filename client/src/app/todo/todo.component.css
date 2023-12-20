@@ -11,23 +11,9 @@
 
     background-color: white;
 }
-
-.header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    min-width: 250px;
-    width: 15%;
-}
-
-.header > h1 {
-    text-transform: capitalize;
-}
-
-.header > div {
+.details {
+    max-width: 100ch;
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
-    max-width: 250px;
+    white-space: nowrap;
 }

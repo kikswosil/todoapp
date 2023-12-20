@@ -18,7 +18,7 @@ import { TodosService } from '../todos/todos.service';
     standalone: true,
     template: `
     <div class="todo">
-      <div>
+      <div class="details">
         <h1>{{ todo.isDone ? '✅' : '❌' }} {{ todo.title }}</h1>
         <div>{{ todo.details }}</div>
       </div>
