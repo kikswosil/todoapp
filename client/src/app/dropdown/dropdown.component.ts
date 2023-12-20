@@ -3,6 +3,42 @@ import { CommonModule } from '@angular/common';
 
 import { Option } from './option.interface';
 
+// @Component({
+//   selector: 'app-dropdown',
+//   standalone: true,
+//   imports: [CommonModule],
+//   template: `
+//     <div class="buttons">
+//       <div class="list-button" (click)="toggleListOpen($event)"><img src="../../assets/more-icon.svg"></div>
+//       <ul class="list" *ngIf="isListOpen">
+//         <li *ngFor="let option of options" (click)="click($event, option.callback)">{{option.text}}</li>
+//       </ul>
+//     </div>
+//   `,
+//   styleUrl: './dropdown.component.css',
+// })
+// export class DropdownComponent {
+//   public isListOpen: boolean = false;
+
+//   @Input({ required: true }) public options!: Option[];
+
+//   @HostListener('window:click')
+//   public closeList() {
+//     this.isListOpen = false;
+//   }
+
+//   public toggleListOpen(event: Event) {
+//     event.stopPropagation();
+//     this.isListOpen = !this.isListOpen;
+//   }
+
+//   public click(event: Event, callback: Function) {
+//     event.stopPropagation();
+//     callback();
+//     this.isListOpen = false;
+//   }
+// }
+
 @Component({
   selector: 'app-dropdown',
   standalone: true,
@@ -11,30 +47,12 @@ import { Option } from './option.interface';
     <div class="buttons">
       <div class="list-button" (click)="toggleListOpen($event)"><img src="../../assets/more-icon.svg"></div>
       <ul class="list" *ngIf="isListOpen">
-        <li *ngFor="let option of options" (click)="noPropagationClick($event, option.callback)">{{option.text}}</li>
+        <li *ngFor="let option of options" (click)="click($event, option.callback)">{{option.text}}</li>
       </ul>
     </div>
   `,
   styleUrl: './dropdown.component.css',
 })
 export class DropdownComponent {
-  public isListOpen: boolean = false;
 
-  @Input({ required: true }) public options!: Option[];
-
-  @HostListener('window:click')
-  public closeList() {
-    this.isListOpen = false;
-  }
-
-  public toggleListOpen(event: Event) {
-    event.stopPropagation();
-    this.isListOpen = !this.isListOpen;
-  }
-
-  public noPropagationClick(event: Event, callback: Function) {
-    event.stopPropagation();
-    callback();
-    this.isListOpen = false;
-  }
 }

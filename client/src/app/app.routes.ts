@@ -5,7 +5,7 @@ import { MainComponent } from './main/main.component';
 import { LogoutComponent } from './logout/logout.component';
 import { EditorComponent } from './editor/editor.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { authenticatedGuard } from './authenticated.guard';
+import { authenticatedGuard } from './guards/authenticated.guard';
 import { RegisterComponent } from './register/register.component';
 
 export const routes: Routes = [
