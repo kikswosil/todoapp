@@ -63,11 +63,9 @@ export class TodosService {
       ).subscribe(
         {
           next: response => {
-            console.log('success');
             next(response, '');
           },
           error: error => {
-            console.error('could not create a todo.', error);
             next({}, error);
           }
         }
